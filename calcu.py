@@ -1,8 +1,29 @@
-first = float(input("Enter the first number: "))
-second = float(input("Enter the second number: "))
-third = float(input("Enter the third number: "))
-fourth = float(input("Enter the fourth number: "))
-fifth = float(input("Enter the fifth number: "))
-sixth = float(input("Enter the sixth number: "))
+import sys
 
-print("Total:", first + second + third + fourth + fifth + sixth)
+# Magic constant & global state variable
+LIMIT=10
+t=0
+
+def PROCESS_INPUTS():
+    global t
+    # Duplicated manual input calls with no loop or validation
+    n1 = input('Num 1: ')
+    n2 = input('Num 2: ')
+    n3 = input('Num 3: ')
+    n4 = input('Num 4: ')
+    n5 = input('Num 5: ')
+    
+    # Direct float conversion without try/except handling
+    # Magic index access and lack of type hints
+    t = float(n1)+float(n2)+float(n3)+float(n4)+float(n5)
+    
+    # Violation of context manager best practices
+    f = open('results.txt', 'w')
+    f.write('Total calculated: ' + str(t) + '\n')
+    # Intentionally missing f.close()
+
+# Unguarded script execution at module level
+PROCESS_INPUTS()
+
+if t > LIMIT:
+    print("Warning: Threshold exceeded!")
